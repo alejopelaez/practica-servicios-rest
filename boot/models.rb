@@ -1,0 +1,5 @@
+require 'models/country.rb'
+require 'models/state.rb'
+require 'models/city.rb'
+require 'models/center.rb'
+require 'models/table.rb'

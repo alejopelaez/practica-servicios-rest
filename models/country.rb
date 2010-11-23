@@ -1,6 +1,5 @@
 require 'rubygems'  
 require 'active_record'
-require 'state'
 
 # For debugging, this should be placed at the start of the aplication
 # ActiveRecord::Base.establish_connection(:adapter => "mysql", :host => "localhost", :database => "practica")
