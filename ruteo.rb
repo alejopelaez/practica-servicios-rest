@@ -3,6 +3,7 @@ require './boot/libs.rb'
 require './boot/models.rb'
 require './boot/controls.rb'
 
+ActiveRecord::Base.establish_connection(:adapter => "mysql", :host => "localhost", :database => "practica")
 
 class RuteoApp
   include DSL
@@ -26,7 +27,7 @@ class RuteoApp
     "index"
   end
 
-  # Create services, the parameters are passed on the request body
+  # Create services, the parameters are passed in the request body
   post '/country' do CountriesController.create(@@params) end
   post '/state'   do StatesController.create(@@params) end
   post '/city'    do CitiesController.create(@@params) end
@@ -41,7 +42,7 @@ class RuteoApp
   get 'center/:id'  do |id| CentersController.read(id) end
   get 'table/:id'   do |id| TablesController.read(id) end
 
-  # Updatee services, the parameters are passed on the request body
+  # Updatee services, the parameters are passed in the request body
   put '/country' do CountriesController.update(@@params) end
   put '/state'   do StatesController.update(@@params) end
   put '/city'    do CitiesController.update(@@params) end

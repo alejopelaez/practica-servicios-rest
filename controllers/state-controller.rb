@@ -7,13 +7,18 @@ class StatesController
         state.save
     end
 
-    def read params       
+    def read params
+        State.find(params["id"])
     end
 
     def update params
+        state = State.find(params["id"])
+        state.update_attributes(params)
     end
 
     def delete params
+        state = State.find(params["id"])
+        state.delete
     end
 
 end

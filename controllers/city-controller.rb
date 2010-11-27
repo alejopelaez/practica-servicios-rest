@@ -7,13 +7,18 @@ class CitiesController
         city.save
     end
 
-    def read params       
+    def read params
+        City.find(params["id"])
     end
 
     def update params
+        city = City.find(params["id"])
+        city.update_attributes(params)
     end
 
     def delete params
+        city = City.find(params["id"])
+        city.delete
     end
 
 end

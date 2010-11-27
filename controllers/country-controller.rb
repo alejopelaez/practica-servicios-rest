@@ -1,20 +1,22 @@
 class CountriesController
     
-    def create params
-        country = Country.new
-        country.name = params["name"]
+    def self.create params
+        country = Country.new(params)
         country.save
     end
 
-    def read id
+    def self.read id
         Country.find(id)
     end
 
-    def update params
+    def self.update params
+        country = Country.find(params["id"])
+        country.update_attributes(params)
     end
 
-    def delete id
-        
+    def self.delete id
+        country = Country.find(params["id"])
+        country.destroy
     end
 
 end

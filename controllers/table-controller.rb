@@ -7,13 +7,18 @@ class TablesController
         table.save
     end
 
-    def read params       
+    def read params
+        Table.find(params["id"])
     end
 
     def update params
+        table = Table.find(params["id"])
+        table.update_attributes(params)
     end
 
     def delete params
+        table = Table.find(params["id"])
+        table.delete
     end
 
 end

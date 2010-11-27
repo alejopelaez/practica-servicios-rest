@@ -7,13 +7,18 @@ class CentersController
         center.save
     end
 
-    def read params       
+    def read params
+        Center.find(params["id"])
     end
 
     def update params
+        center = Center.find(params["id"])
+        center.update_attributes(params)
     end
 
     def delete params
+        center = Center.find(params["id"])
+        center.delete
     end
 
 end
