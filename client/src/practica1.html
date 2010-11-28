@@ -1,0 +1,46 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+  <head>     
+    <title>Google docs MVC voting system</title>
+    <script type="text/javascript" src="../lib/jquery-1.4.2.js"></script>
+    <script type="text/javascript" src="../lib/util.js"></script>
+    <script type="text/javascript" src="model.js"></script>
+    <script type="text/javascript" src="view.js"></script>
+    <script type="text/javascript" src="controller.js"></script>
+    <script language="javascript" type="text/javascript" src="../lib/jqplot/jquery.jqplot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../lib/jqplot/jqplot.barRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../lib/jqplot/jqplot.categoryAxisRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../lib/jqplot/jqplot.canvasTextRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../lib/jqplot/jqplot.cursor.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../lib/jqplot/jqplot.highlighter.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../lib/jqplot/jqplot.pieRenderer.min.js"></script>
+    <script language="javascript" type="text/javascript" src="../lib/jqui/js/jquery-ui-1.8.5.custom.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../lib/jqplot/jquery.jqplot.min.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/jqui/css/overcast/jquery-ui-1.8.5.custom.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script type="text/javascript">    
+      $(function(){
+        var model = new $.Model();
+        var view = new $.View($("#gdocs"), $("#data"), $("#candidatos"), $("#chart"));
+        var controller = new $.Controller(model,view);	  	  
+      });
+    </script>
+  </head>
+  <body>
+    <div id="content">
+      <h1> Resultados elecciones </h1>
+      <p><strong> Ingrese su key: </strong> <input type="text" id="key" /></p>
+      <div id="gdocs">
+	<div id="data"></div>
+      </div>
+      <p><div id="candidatos"></div></p>
+      <div id="wrapper">
+	<div id="chart"></div>
+	<div id="tabla"></div>
+      </div>
+    </div>
+  </body>
+</html>
