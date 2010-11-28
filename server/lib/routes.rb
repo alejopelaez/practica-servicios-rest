@@ -13,9 +13,6 @@ class Routes < Array
         routes = self.select{|i| i.method == method}        
         against = Path.new path
         routes.each do |r|
-            puts "---"
-            puts against.parts
-            puts r.path.parts
             res, vals = r.path.match? against
             return r, vals if res
         end
@@ -45,9 +42,9 @@ class Path
         if(path.split('.').size == 1)
             @extension = nil
         else
-            @extension = "." + path.split('.').last
+            @extension = path.split('.').last
         end
-        path = path.sub(/#{@extension}$/,'') if @extension != nil
+        path = path.sub(/.#{@extension}$/,'') if @extension != nil
         @parts = path.split('/').reject{|a|a==""}
     end
 
@@ -67,8 +64,7 @@ class Path
     end 
 
     def static_match? path
-        @parts.each_with_index do |p,i|
-            puts p[0]
+        @parts.each_with_index do |p,i|            
             return false unless p[0] == ?: || path.parts[i] == p
         end
         return true
