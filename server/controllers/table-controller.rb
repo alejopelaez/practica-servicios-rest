@@ -9,11 +9,17 @@ class TablesController
       tables.to_xml
     end
   end
-  def self.create params
+  def self.create params, format
     table = Table.new
     table.name = params["name"]
     table.center = Center.find(params["center_id"].to_i)
     table.save
+    case format
+    when 'json'
+      table.to_json
+    when 'xml'
+      table.to_xml
+    end
   end
 
   def self.read params

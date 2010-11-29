@@ -8,11 +8,17 @@ class CentersController
       centers.to_xml
     end
   end
-  def self.create params
+  def self.create params, params
     center = Center.new
     center.name = params["name"]
     center.city = City.find(params["city_id"].to_i)
     center.save
+    case format
+    when 'json'
+      center.to_json
+    when 'xml'
+      center.to_xml
+    end
   end
 
   def self.read params

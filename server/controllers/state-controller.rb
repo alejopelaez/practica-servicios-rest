@@ -9,11 +9,17 @@ class StatesController
       states.to_xml
     end
   end
-  def self.create params
+  def self.create params, format
     state = State.new
     state.name = params["name"]
     state.country = Country.find(params["country_id"].to_i)
     state.save
+    case format
+    when 'json' 
+      state.to_json
+    when 'xml'
+      state.to_xml
+    end
   end
 
   def self.read params

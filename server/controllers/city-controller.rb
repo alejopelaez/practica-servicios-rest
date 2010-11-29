@@ -13,6 +13,12 @@ class CitiesController
     city.name = params["name"]
     city.state = State.find(params["state_id"].to_i)
     city.save
+    case format
+    when 'json'
+      city.to_json
+    when 'xml'
+      city.to_xml
+    end
   end
 
   def self.read params

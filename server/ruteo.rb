@@ -26,19 +26,19 @@ class RuteoApp
   end 
 
   # All
-  get '/countries.:format' do | format |
+  get '/country.:format' do | format |
     CountriesController.index format
   end
-  get '/states.:format'   do | format |
+  get '/state.:format'   do | format |
     StatesController.index format 
   end
-  get '/cities.:format'    do | format |
+  get '/city.:format'    do | format |
     CitiesController.index format
   end
-  get '/centers.:format'  do  | format |
+  get '/center.:format'  do  | format |
     CentersController.index format
   end
-  get '/tables.:format'   do | format |
+  get '/table.:format'   do | format |
     TablesController.index format
   end
 
@@ -47,10 +47,18 @@ class RuteoApp
   post '/country.:format' do | format |
     CountriesController.create(@@params, format) 
   end
-  post '/state'   do StatesController.create(@@params) end
-  post '/city'    do CitiesController.create(@@params) end
-  post '/center'  do CentersController.create(@@params) end
-  post '/table'   do TablesController.create(@@params) end
+  post '/state.:format'   do | format |
+    StatesController.create(@@params, format) 
+  end
+  post '/city.:format'    do  | format |
+    CitiesController.create(@@params, format) 
+  end
+  post '/center.:format'  do | format |
+    CentersController.create(@@params, format) 
+  end
+  post '/table'   do | format |
+    TablesController.create(@@params, format) 
+  end
 
   # Read services
   # Not finished yet, must do something with ther resource
