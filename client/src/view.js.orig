@@ -55,8 +55,13 @@ jQuery.extend({
         /**
          * Funcion dummy
          */
-        this.viewLoadData = function(){
+<<<<<<< HEAD
+        this.viewLoadData = function(key){
             $.getJSON("http://127.0.0.1:9292/totals/Colombia.json"+"?callback=?", function(data) {
+=======
+        this.viewLoadData = function(){
+            $.getJSON("/totals/Colombia.json"+"?callback=?", function(data) {
+>>>>>>> 778364eacda0338f677943120f2bfef79727ffde
                 self.showCandidatos(data);
             });
             $.getJSON("http://127.0.0.1:9292/results/Colombia.json"+"?callback=?", function(data) {
@@ -84,6 +89,7 @@ jQuery.extend({
 			}
 		    }
 		    
+
 		}
                 self.showTable("colombia", 0, "", "");
 		var arr = jQuery("#resultTable").find('[class]');
