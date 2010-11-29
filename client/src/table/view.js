@@ -21,14 +21,13 @@ jQuery.extend({
 	/**
 	 * Pega los botones y campos para crear un nuevo centro.
 	 */
-//	$buttons.append($("<form name='input' action='http://127.0.0.1:9292/center' method='post' target = '_self'>city_id: <input type='text' name='city_id'/><br/>nombre: <input type = 'text' name = 'name'/><br/><input id='create_but' type='submit' value='Crear'/></form>"));
-	$buttons.html($("<h3>Crear</h3><input id='city_id' type = 'text' name = 'name'/> city id<br/><input id='center_name' type = 'text' name = 'name'/>nombre<br/><br/>"));
+	$buttons.html($("<h3>Crear</h3><input id='center_id' type = 'text' name = 'name'/> center id<br/><input id='table_name' type = 'text' name = 'name'/>nombre<br/><br/>"));
 
 	$buttons.append($("<input type='button' value='Create'></input><br><br>").click(function(){
-	    id = $("#city_id").val();
-	    nombre = $("#center_name").val();
-	    $.post(url+"/center",{name:nombre, city_id:id});
-	    self.viewLoadData();
+	    params = new Object();
+	    params.center_id = $("#center_id").val();
+	    params.name = $("#table_name").val();
+	    self.viewCreate(params);
 	}));
 
 	$buttons2.html($("<h3>Leer (ingresar id)</h3><input id='center_id_r' type = 'text' name = 'name'/> id<br/>"));
@@ -53,7 +52,7 @@ jQuery.extend({
 	    html = "<table>";
 	    html += "<tr><th>id</th><th>Nombre</th><th>city id</th></tr>";
 	    for(i in data){
-		c = data[i].center;
+		c = data[i];
 		html += "<tr>";
 		html += "<td>"+c.id+"</td>";
 		html += "<td>"+c.name+"</td>";
@@ -77,6 +76,10 @@ jQuery.extend({
 	    for(i in listeners)
 		listeners[i].viewLoadData();
 	}
+	this.viewCreate = function(params){
+	    for(i in listeners)
+		listeners[i].viewCreate(params);
+	}
 	this.viewLoadSingle = function(id){
 	    for(i in listeners)
 		listeners[i].viewLoadSingle(id);
@@ -99,7 +102,8 @@ jQuery.extend({
 	    viewLoadData : function(){},
 	    viewLoadSingle : function(id){},
 	    viewModify : function(params){},
-	    viewDelete : function(id){}
+	    viewDelete : function(id){},
+	    viewCreate : function(params){}
 	}, list);
     }
     
