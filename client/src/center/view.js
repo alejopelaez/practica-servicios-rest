@@ -1,3 +1,4 @@
+url = "http://127.0.0.1"
 jQuery.extend({
     View: function($buttons, $dataOutput){
 	/**
@@ -35,7 +36,7 @@ jQuery.extend({
 		html += "<td>"+c.id+"</td>";
 		html += "<td>"+c.name+"</td>";
 		html += "<td>"+c.city_id+"</td>";
-//		html += "<td>""</td>";
+		html += "<td><button type='button'>Delete</button></td>";
 		html += "</tr>";
 	    }
 
