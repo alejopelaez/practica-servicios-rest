@@ -3,26 +3,13 @@ require './boot/libs.rb'
 require './boot/models.rb'
 require './boot/controls.rb'
 
-ActiveRecord::Base.establish_connection(:adapter => "mysql", :host => "localhost", :database => "practica")
+ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => "practica")
 
 class RuteoApp
   include DSL
   include Template
   @@params = []
-  get '/graphs/:where/:piedad/:jojoy/:reyes' do |w , p, j, r|
-    @bar_chart = Grapher.bar_chart("Resultados en #{w}",{:Piedad => [[p.to_i],Grapher::RED], 
-                                     :Jojoy => [[j.to_i],Grapher::BLUE],
-                                     :Reyes => [[r.to_i],Grapher::GREEN]})
-    "graphs/show"
-  end
-    
-  post '/results' do 
-    @country = CountriesController.show(@@params["key"])    
-    @totales = @country.get_totals
-    
-    "countries/result2"
-  end
-  
+
   # Service that returns a json representing the results tree
   # of the given country
   get 'results/:cname.json' do |cname|
@@ -38,9 +25,21 @@ class RuteoApp
     "{#{country.get_totals.map{|k,v| "\"#{k}\":#{v}"}.join(',')}}"
   end 
 
-  get '/' do
-    "index"
+  # All
+  get '/country.:format' do | format |
+    CountriesController.index format
   end
+  get '/state.:format'   do | format |
+    StatesController.index format 
+  end
+  get '/city.:format'    do | format |
+    CitiesController.index format
+  end
+  get '/center.:format'  do  | format |
+    CentersController.index format
+  end
+  get '/table'   do TablesController.index end
+
 
   # Create services, the parameters are passed in the request body
   post '/country' do CountriesController.create(@@params) end
@@ -51,11 +50,11 @@ class RuteoApp
 
   # Read services
   # Not finished yet, must do something with ther resource
-  get 'country/:id' do |id| CountriesController.read(id) end
-  get 'state/:id'   do |id| StatesController.read(id) end
-  get 'city/:id'    do |id| CitiesController.read(id) end
-  get 'center/:id'  do |id| CentersController.read(id) end
-  get 'table/:id'   do |id| TablesController.read(id) end
+  get '/country/:id' do |id| CountriesController.read(id) end
+  get '/state/:id'   do |id| StatesController.read(id) end
+  get '/city/:id'    do |id| CitiesController.read(id) end
+  get '/center/:id'  do |id| CentersController.read(id) end
+  get '/table/:id'   do |id| TablesController.read(id) end
 
   # Updatee services, the parameters are passed in the request body
   put '/country' do CountriesController.update(@@params) end
@@ -65,11 +64,11 @@ class RuteoApp
   put '/table'   do TablesController.update(@@params) end
 
   # Delete services
-  delete 'country/:id' do |id| CountriesController.delete(id) end
-  delete 'state/:id'   do |id| StatesController.delete(id) end
-  delete 'city/:id'    do |id| CitiesController.delete(id) end
-  delete 'center/:id'  do |id| CentersController.delete(id) end
-  delete 'table/:id'   do |id| TablesController.delete(id) end
+  delete '/country/:id' do |id| CountriesController.delete(id) end
+  delete '/state/:id'   do |id| StatesController.delete(id) end
+  delete '/city/:id'    do |id| CitiesController.delete(id) end
+  delete '/center/:id'  do |id| CentersController.delete(id) end
+  delete '/table/:id'   do |id| TablesController.delete(id) end
 
   # If the request passed a callback, answer in the appropiate way.
   # Or else, answer normally.
@@ -85,13 +84,17 @@ class RuteoApp
     path = env["PATH_INFO"]
     method = env['REQUEST_METHOD']
     @@params = Rack::Request.new(env).params
-    route,vals = self.class.routes.match method, path
+    route,vals, extension = self.class.routes.match method, path
+    if extension
+      vals << extension
+    end
     if route.nil?
       return [404, {'Content-Type' => 'text/html'}, '404 page not found']
     else
-      if(route.path.extension == "json")
-          return [200, {'Content-Type' => 'application/json'}, callback_response(@@params["callback"],route.action.call(*vals))]
-      elsif(route.path.extension == "xml")
+      if(extension == "json")
+        return [200, {'Content-Type' => 'application/json'}, callback_response(@@params["callback"],route.action.call(*vals))]
+      elsif(extension == "xml")
+        return [200, {'Content-Type' => 'application/xml'}, callback_response(@@params["callback"],route.action.call(*vals))]
       else
         begin
           return [200, {'Content-Type' => 'text/html'}, self.class.htmlize(self.class.erb(route.action.call(*vals)))]

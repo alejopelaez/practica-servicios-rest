@@ -13,8 +13,8 @@ class Routes < Array
         routes = self.select{|i| i.method == method}        
         against = Path.new path
         routes.each do |r|
-            res, vals = r.path.match? against
-            return r, vals if res
+            res, vals, format = r.path.match? against
+            return r, vals, format if res
         end
         return nil,nil
     end
@@ -51,15 +51,15 @@ class Path
     # Hace el match entre este path y otro dado, y retorna los valores
     # correspondientes a los parametros opcionales.
     def match? path        
-        if(path.extension == @extension && static_match?(path) && values_match?(path))
+        if(static_match?(path) && values_match?(path))
             values = []
             @parts.each_with_index do |p,i|
                 values << path.parts[i] if p[0] == ?:
             end
             values << path.extension[1..-1] if @extension != nil && @extension[1] == ?:
-            return true,values
+            return true, values, path.extension
         else
-            return false, nil
+            return false, nil, nil
         end
     end 
 

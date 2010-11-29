@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'active_record'
 
-ActiveRecord::Base.establish_connection(:adapter => "mysql", :host => "localhost", :database => "practica")
+ActiveRecord::Base.establish_connection(:adapter => "sqlite3",  :database => "practica")
 
 ActiveRecord::Schema.define do
     create_table :countries do |table|

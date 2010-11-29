@@ -1,24 +1,32 @@
 class CitiesController
-    
-    def create params
-        city = City.new
-        city.name = params["name"]
-        city.state = State.find(params["state_id"].to_i)
-        city.save
+  def self.index format
+    cities = City.all
+    case format
+    when 'json'
+      cities.to_json
+    when 'xml'
+      cities.to_xml
     end
+  end
+  def self.create params
+    city = City.new
+    city.name = params["name"]
+    city.state = State.find(params["state_id"].to_i)
+    city.save
+  end
 
-    def read params
-        City.find(params["id"])
-    end
+  def self.read params
+    City.find(params["id"])
+  end
 
-    def update params
-        city = City.find(params["id"])
-        city.update_attributes(params)
-    end
+  def self.update params
+    city = City.find(params["id"])
+    city.update_attributes(params)
+  end
 
-    def delete params
-        city = City.find(params["id"])
-        city.delete
-    end
+  def self.delete params
+    city = City.find(params["id"])
+    city.delete
+  end
 
 end
