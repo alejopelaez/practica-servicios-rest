@@ -43,36 +43,8 @@ jQuery.extend({
             },
             onLoadEnd : function(info){
                 //extraiga los datos
-		var data = info['data'];
-		var prune = info['recursive'];
-		if(prune)
-		    var parent = data[0][1].toLowerCase();
-		else
-		    var parent = 'mesa ' + data[0][1];
-		var whitespace = false;
-		if(totales[parent] == undefined){
-		    if(prune)
-			totales[parent] = [];
-		    else
-			totales[parent] = {};
-		}
-		for(i in data){
-                    if(data[i][1] == null || data[i][1] == "")
-			whitespace = true;
-		    if( data[i][1] !== "" && data[i][1] != null && whitespace)
-		    {
-			if(prune)
-			{
-			    totales[parent].push(data[i][0].toLowerCase());
-			    model.getAll(data[i][1]);
-			}
-			else 
-			{
-			    totales[parent][data[i][0].toLowerCase()] = data[i][1];
-			    candidatos[data[i][0].toLowerCase()] += data[i][1];
-			}
-                    }
-                }
+
+		totales = info;
             }
         });
         model.addListener(mlist);

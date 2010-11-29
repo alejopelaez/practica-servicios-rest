@@ -3,7 +3,7 @@ require './boot/libs.rb'
 require './boot/models.rb'
 require './boot/controls.rb'
 
-ActiveRecord::Base.establish_connection(:adapter => "mysql", :database => "practica")
+ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => "practica")
 
 class RuteoApp
   include DSL

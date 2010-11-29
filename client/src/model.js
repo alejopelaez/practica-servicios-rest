@@ -18,22 +18,10 @@ jQuery.extend({
             //haciendo algo
             self.onLoadBegin();
             callback = function(root) {		
-                var rows = root.table.rows;
-                var result = [];
-
-                for ( r in rows ) {
-		    var rresult = [];
-                    for( c in rows[r].c ){
-                        rresult.push( rows[r].c[c].v );
-                    }
-		    result.push(rresult);
-                }
-		var prune = root.table.cols[1].type != 'number' ? true : false;
-		var ans = { 'data' : result, 'recursive' : prune};
-                self.onLoadEnd(ans);
+                self.onLoadEnd(root);
             }	    
             // Leer de google docs
-            $.getScript('http://spreadsheets.google.com/tq?tqx=responseHandler:callback&key='+key+'&pub=1');
+            $.getScript('/center/colombia.json?callback=callback');
         }
 
         /**
