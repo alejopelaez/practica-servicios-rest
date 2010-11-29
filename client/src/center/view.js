@@ -53,7 +53,7 @@ jQuery.extend({
 	    html = "<table>";
 	    html += "<tr><th>id</th><th>Nombre</th><th>city id</th></tr>";
 	    for(i in data){
-		c = data[i].center;
+		c = data[i];
 		html += "<tr>";
 		html += "<td>"+c.id+"</td>";
 		html += "<td>"+c.name+"</td>";

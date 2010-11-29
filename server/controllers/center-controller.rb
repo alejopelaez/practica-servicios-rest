@@ -17,15 +17,20 @@ class CentersController < BaseController
   end
 
   def self.update params, format
-    center = Center.find(params["id"])
-    if center.update_attributes(params)
+      puts params.inspect
+      center = Center.find(params["id"])
+      center.city_id = params["city_id"]     
+      center.name = params["name"]
+      center.id = params["id"]
+      center.city_id = params["city_id"]
+      center.save
       render center, format
-    end
   end
 
   def self.delete id
     center = Center.find(id)
     center.delete
+    ""
   end
 
 end

@@ -57,7 +57,7 @@ jQuery.extend({
         }
 
 	this.modify = function(params){
-	    $.post(url+"/center.json",{id: params.id, name: params.nombre, city_id: params.city_id, method : "PUT"});
+	    $.post(url+"/center.json",{id: params.id, name: params.name, city_id: params.city_id, method : "PUT"});
 	    self.loadData();
 	}
 
