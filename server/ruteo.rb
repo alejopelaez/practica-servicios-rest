@@ -76,7 +76,6 @@ class RuteoApp
     path = env["PATH_INFO"]
     method = env['REQUEST_METHOD']
     @@params = Rack::Request.new(env).params
-      puts @@params.inspect
     route,vals, extension = self.class.routes.match method, path
     if extension
       vals << extension

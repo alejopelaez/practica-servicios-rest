@@ -1,6 +1,6 @@
-url = "http://127.0.0.1"
+url = "http://127.0.0.1:9292"
 jQuery.extend({
-    View: function($buttons, $dataOutput){
+    View: function($buttons, $buttons2, $dataOutput){
 	/**
 	 * Referencia a uno mismo (Truco!!)
 	 */
@@ -21,22 +21,43 @@ jQuery.extend({
 	/**
 	 * Pega los botones y campos para crear un nuevo centro.
 	 */
-	$buttons.append($("<form name='input' action='http://127.0.0.1:9292/center' method='post' target = '_self'>city_id: <input type='text' name='city_id'/><br/>nombre: <input type = 'text' name = 'name'/><br/><input onclick='view.create_but' type='submit' value='Crear'/></form>"));
+//	$buttons.append($("<form name='input' action='http://127.0.0.1:9292/center' method='post' target = '_self'>city_id: <input type='text' name='city_id'/><br/>nombre: <input type = 'text' name = 'name'/><br/><input id='create_but' type='submit' value='Crear'/></form>"));
+	$buttons.html($("<h3>Crear</h3><input id='city_id' type = 'text' name = 'name'/> city id<br/><input id='center_name' type = 'text' name = 'name'/>nombre<br/><br/>"));
 
-	this.create_but = function(){
-	    alert("hola");
-	}
+	$buttons.append($("<input type='button' value='Create'></input><br><br>").click(function(){
+	    id = $("#city_id").val();
+	    nombre = $("#center_name").val();
+	    $.post(url+"/center",{name:nombre, city_id:id});
+	    self.viewLoadData();
+	}));
+
+	$buttons2.html($("<h3>Leer (ingresar id)</h3><input id='center_id_r' type = 'text' name = 'name'/> id<br/>"));
+	$buttons2.append($("<input id='center_name_r' type = 'text' name = 'name'/> name<br/>"));
+	$buttons2.append($("<input id='city_id_r' type = 'text' name = 'name'/> city id<br/><br/>"));
+	$buttons2.append($("<input type='button' value='Load'></input>").click(function(){
+	    self.viewLoadSingle($("#center_id_r").val());
+	}));
+	$buttons2.append($("<input type='button' value='Modify'></input>").click(function(){
+	    params = new Object();
+	    params.id = $("#center_id_r").val();
+	    params.name = $("#center_name_r").val();
+	    params.city_id = $("#city_id_r").val();
+	    viewModify(params);
+	}));
+	$buttons2.append($("<input type='button' value='Delete'></input><br><br>").click(function(){
+	    id = $("#center_id_r").val();
+	    viewModify(id);
+	}));
 
 	this.createTable = function(data){
 	    html = "<table>";
 	    html += "<tr><th>id</th><th>Nombre</th><th>city id</th></tr>";
 	    for(i in data){
-		c = data[i].center;
+		c = data[i];
 		html += "<tr>";
 		html += "<td>"+c.id+"</td>";
 		html += "<td>"+c.name+"</td>";
 		html += "<td>"+c.city_id+"</td>";
-		html += "<td><button type='button'>Delete</button></td>";
 		html += "</tr>";
 	    }
 
@@ -44,10 +65,21 @@ jQuery.extend({
 	    $dataOutput.html(html);
 	}
 
+	this.loadSingleEnd = function(data){
+	    $("#city_id_r").val(data.city_id);
+	    $("#center_name_r").val(data.name);
+	}
+
 	/**
 	 * Funcion dummy
 	 */
 	this.viewLoadData = function(){
+	    for(i in listeners)
+		listeners[i].viewLoadData();
+	}
+	this.viewLoadSingle = function(id){
+	    for(i in listeners)
+		listeners[i].viewLoadSingle(id);
 	}
     },
     /**
@@ -56,7 +88,10 @@ jQuery.extend({
     ViewListener: function(list) {
 	if(!list) list = {};
 	return $.extend({
-	    viewLoadData : function(){}
+	    viewLoadData : function(){},
+	    viewLoadSingle : function(id){},
+	    viewModify : function(params){},
+	    viewDelete : function(id){}
 	}, list);
     }
     

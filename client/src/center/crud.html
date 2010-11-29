@@ -13,7 +13,7 @@
     <script type="text/javascript">    
       $(function(){
       var model = new $.Model();
-      var view = new $.View($("#buttons"), $("#table"));
+      var view = new $.View($("#buttons"), $("#buttons2"), $("#table"));
       var controller = new $.Controller(model,view);
       model.loadData();
       });
@@ -23,6 +23,7 @@
     <div id="content">
 	  <div id="table"></div>
       <div id="buttons"></div>
+      <div id="buttons2"></div>
     </div>
   </body>
 </html>

@@ -5,9 +5,20 @@ jQuery.extend({
          */
         var vlistener = $.ViewListener({
             viewLoadData : function(){
-            }
+		model.loadData();
+            },
+	    viewLoadSingle : function(id){
+		model.loadSingle(id);
+	    },
+	    viewModify : function(params){
+		model.modify(params);
+	    },
+	    viewDelete : function(id){
+		model.mdelete(id);
+	    }
         });
         view.addListener(vlistener);
+	
 
         /**
          * listen to the model
@@ -17,7 +28,10 @@ jQuery.extend({
             },
             onLoadEnd : function(info){
 		view.createTable(info);
-            }
+            },
+	    loadSingleEnd : function(info){
+		view.loadSingleEnd(info);
+	    }
         });
         model.addListener(mlist);
     }
