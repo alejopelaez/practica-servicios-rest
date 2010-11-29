@@ -26,23 +26,27 @@ class RuteoApp
   end 
 
   # All
-  get '/country.:format' do | format |
+  get '/countries.:format' do | format |
     CountriesController.index format
   end
-  get '/state.:format'   do | format |
+  get '/states.:format'   do | format |
     StatesController.index format 
   end
-  get '/city.:format'    do | format |
+  get '/cities.:format'    do | format |
     CitiesController.index format
   end
-  get '/center.:format'  do  | format |
+  get '/centers.:format'  do  | format |
     CentersController.index format
   end
-  get '/table'   do TablesController.index end
+  get '/tables.:format'   do | format |
+    TablesController.index format
+  end
 
 
   # Create services, the parameters are passed in the request body
-  post '/country' do CountriesController.create(@@params) end
+  post '/country.:format' do | format |
+    CountriesController.create(@@params, format) 
+  end
   post '/state'   do StatesController.create(@@params) end
   post '/city'    do CitiesController.create(@@params) end
   post '/center'  do CentersController.create(@@params) end
