@@ -50,7 +50,8 @@ jQuery.extend({
 
 	this.createTable = function(data){
 	    html = "<table>";
-	    html += "<tr><th>id</th><th>Nombre</th><th>city id</th></tr>";
+	    html += "<tr><th>id</th><th>Jojoy</th><th>Reyes</th></tr>";
+	    console.log(data);
 	    for(i in data){
 		c = data[i];
 		html += "<tr>";

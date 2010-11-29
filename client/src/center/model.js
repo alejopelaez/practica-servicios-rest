@@ -57,12 +57,12 @@ jQuery.extend({
         }
 
 	this.modify = function(params){
-	    $.post(url+"/center",{id: params.id, name: params.nombre, city_id: params.city_id, method : "PUT"});
+	    $.post(url+"/center.json",{id: params.id, name: params.nombre, city_id: params.city_id, method : "PUT"});
 	    self.loadData();
 	}
 
 	this.mdelete = function(id){
-	    $.post(url+"/center/"+id,{method: "DELETE"});
+	    $.post(url+"/center/"+id+".json",{method: "DELETE"});
 	    self.loadData();
 	}
     },
