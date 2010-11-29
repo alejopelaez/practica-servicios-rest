@@ -11,13 +11,15 @@ class CountriesController < BaseController
     end
   end
 
-  def self.read id
-    Country.find(id)
+  def self.read id, format
+    render Country.find(id), format
   end
 
-  def self.update params
+  def self.update params, format
     country = Country.find(params["id"])
-    country.update_attributes(params)
+    if country.update_attributes(params)
+      render country, format
+    end
   end
 
   def self.delete id

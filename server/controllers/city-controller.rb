@@ -12,13 +12,15 @@ class CitiesController < BaseController
     end
   end
 
-  def self.read params
-    City.find(params["id"])
+  def self.read params, format
+    render City.find(params["id"]), format
   end
 
-  def self.update params
+  def self.update params, format
     city = City.find(params["id"])
-    city.update_attributes(params)
+    if city.update_attributes(params)
+      render city, format
+    end
   end
 
   def self.delete params

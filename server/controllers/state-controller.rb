@@ -13,13 +13,15 @@ class StatesController < BaseController
     end
   end
 
-  def self.read params
-    State.find(params["id"])
+  def self.read params, format
+    render State.find(params["id"]), format
   end
 
-  def self.update params
+  def self.update params, format
     state = State.find(params["id"])
-    state.update_attributes(params)
+    if state.update_attributes(params)
+      render state, format
+    end
   end
 
   def self.delete params

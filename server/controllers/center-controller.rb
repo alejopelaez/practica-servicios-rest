@@ -12,13 +12,15 @@ class CentersController < BaseController
     end
   end
 
-  def self.read params
-    Center.find(params["id"])
+  def self.read params, format
+    render Center.find(params["id"]), format
   end
 
-  def self.update params
+  def self.update params, format
     center = Center.find(params["id"])
-    center.update_attributes(params)
+    if center.update_attributes(params)
+      render center, format
+    end
   end
 
   def self.delete params

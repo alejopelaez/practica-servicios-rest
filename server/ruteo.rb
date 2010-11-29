@@ -76,11 +76,11 @@ class RuteoApp
   put '/table.:format'   do | format | TablesController.update(@@params, format) end
 
   # Delete services
-  delete '/country/:id.:format' do | id , format | CountriesController.delete(id,format) end
-  delete '/state/:id.:format'   do | id , format | StatesController.delete(id,format) end
-  delete '/city/:id.:format'    do | id , format | CitiesController.delete(id,format) end
-  delete '/center/:id.:format'  do | id , format | CentersController.delete(id,format) end
-  delete '/table/:id.:format'   do | id , format | TablesController.delete(id,format) end
+  delete '/country/:id.:format' do | id , format | CountriesController.delete(id) end
+  delete '/state/:id.:format'   do | id , format | StatesController.delete(id) end
+  delete '/city/:id.:format'    do | id , format | CitiesController.delete(id) end
+  delete '/center/:id.:format'  do | id , format | CentersController.delete(id) end
+  delete '/table/:id.:format'   do | id , format | TablesController.delete(id) end
 
   # If the request passed a callback, answer in the appropiate way.
   # Or else, answer normally.
