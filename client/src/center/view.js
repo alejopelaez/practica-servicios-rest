@@ -20,7 +20,9 @@ jQuery.extend({
 	/**
 	 * Pega los botones y campos para crear un nuevo centro.
 	 */
-	$buttons.append($("<form name='input' action='http://127.0.0.1:9292/center' method='post' target = '_self'>city_id: <input type='text' name='city_id'/><br/>nombre: <input type = 'text' name = 'name'/><br/><input type='submit' value='Crear'/></form>"));
+	$buttons.append($("<form name='input' action='http://127.0.0.1:9292/center' method='post' target = '_self'>city_id: <input type='text' name='city_id'/><br/>nombre: <input type = 'text' name = 'name'/><br/><input onclick='create_but' type='submit' value='Crear'/></form>"));
+
+
 
 	this.createTable = function(data){
 	    html = "<table>";
