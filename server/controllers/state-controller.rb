@@ -1,28 +1,27 @@
-class StatesController
+class StatesController < BaseController
 
   def self.index format
     states = State.aall
-    case format
-    when 'json' 
-      states.to_json
-    when 'xml'
-      states.to_xml
-    end
+    render states, format
   end
-  def self.create params
+  def self.create params, format
     state = State.new
     state.name = params["name"]
     state.country = Country.find(params["country_id"].to_i)
-    state.save
+    if state.save
+     render state, format
+    end
   end
 
-  def self.read params
-    State.find(params["id"])
+  def self.read params, format
+    render State.find(params["id"]), format
   end
 
-  def self.update params
+  def self.update params, format
     state = State.find(params["id"])
-    state.update_attributes(params)
+    if state.update_attributes(params)
+      render state, format
+    end
   end
 
   def self.delete params
