@@ -1,5 +1,3 @@
-candidatos = { "jojoy" : 0, "piedad" : 0, "reyes" : 0 };
-totales = {};
 jQuery.extend({
     Controller: function(model, view){
         /**

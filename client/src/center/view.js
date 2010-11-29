@@ -20,20 +20,22 @@ jQuery.extend({
 	/**
 	 * Pega los botones y campos para crear un nuevo centro.
 	 */
-	$buttons.append($("<form name='input' action='http://127.0.0.1:9292/center' method='post' target = '_self'>city_id: <input type='text' name='city_id'/><br/>nombre: <input type = 'text' name = 'name'/><br/><input onclick='create_but' type='submit' value='Crear'/></form>"));
+	$buttons.append($("<form name='input' action='http://127.0.0.1:9292/center' method='post' target = '_self'>city_id: <input type='text' name='city_id'/><br/>nombre: <input type = 'text' name = 'name'/><br/><input onclick='view.create_but' type='submit' value='Crear'/></form>"));
 
-
+	this.create_but = function(){
+	    alert("hola");
+	}
 
 	this.createTable = function(data){
 	    html = "<table>";
 	    html += "<tr><th>id</th><th>Nombre</th><th>city id</th></tr>";
-	    
 	    for(i in data){
 		c = data[i].center;
 		html += "<tr>";
 		html += "<td>"+c.id+"</td>";
 		html += "<td>"+c.name+"</td>";
 		html += "<td>"+c.city_id+"</td>";
+//		html += "<td>""</td>";
 		html += "</tr>";
 	    }
 
