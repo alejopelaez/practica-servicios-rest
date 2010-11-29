@@ -75,8 +75,11 @@ jQuery.extend({
 			    var tables = centers[k].tables;
 			    totales[centers[k].name] = [];
 			    for(l in tables){
-				totales[centers[k].name].push(tables[l].name);
-				totales["mesa "+tables[i].id] = { 'reyes' : tables[l].reyes, 'jojoy' : tables[l].jojoy, 'piedad' : tables[l].piedad };
+				totales[centers[k].name].push("mesa "+tables[l].id.toString());
+				totales["mesa "+tables[l].id.toString()] = {};
+				totales["mesa "+tables[l].id.toString()]['reyes'] = tables[l].reyes; 
+				totales["mesa "+tables[l].id.toString()]['jojoy'] = tables[l].jojoy;
+				totales["mesa "+tables[l].id.toString()]['piedad'] = tables[l].piedad;
 			    }
 			}
 		    }
