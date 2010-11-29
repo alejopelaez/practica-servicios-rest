@@ -75,11 +75,12 @@ jQuery.extend({
 			    var tables = centers[k].tables;
 			    totales[centers[k].name] = [];
 			    for(l in tables){
-				totales[centers[k].name],push(tables[l].name);
+				totales[centers[k].name].push(tables[l].name);
 				totales["mesa "+tables[i].id] = { 'reyes' : tables[l].reyes, 'jojoy' : tables[l].jojoy, 'piedad' : tables[l].piedad };
 			    }
 			}
 		    }
+		    
 		}
                 self.showTable("colombia", 0, "", "");
             });
