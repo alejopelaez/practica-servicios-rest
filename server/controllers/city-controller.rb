@@ -1,23 +1,14 @@
-class CitiesController
+class CitiesController < BaseController
   def self.index format
     cities = City.all
-    case format
-    when 'json'
-      cities.to_json
-    when 'xml'
-      cities.to_xml
-    end
+    render cities, format
   end
-  def self.create params
+  def self.create params, format
     city = City.new
     city.name = params["name"]
     city.state = State.find(params["state_id"].to_i)
-    city.save
-    case format
-    when 'json'
-      city.to_json
-    when 'xml'
-      city.to_xml
+    if city.save
+      render city, format
     end
   end
 

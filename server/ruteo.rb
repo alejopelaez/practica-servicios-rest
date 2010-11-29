@@ -62,25 +62,25 @@ class RuteoApp
 
   # Read services
   # Not finished yet, must do something with ther resource
-  get '/country/:id' do |id| CountriesController.read(id) end
-  get '/state/:id'   do |id| StatesController.read(id) end
-  get '/city/:id'    do |id| CitiesController.read(id) end
-  get '/center/:id'  do |id| CentersController.read(id) end
-  get '/table/:id'   do |id| TablesController.read(id) end
+  get '/country/:id.:format' do | id , format | CountriesController.read(id,format) end
+  get '/state/:id.:format'   do | id , format | StatesController.read(id,format) end
+  get '/city/:id.:format'    do | id , format | CitiesController.read(id,format) end
+  get '/center/:id.:format'  do | id , format | CentersController.read(id,format) end
+  get '/table/:id.:format'   do | id , format | TablesController.read(id,format) end
 
   # Updatee services, the parameters are passed in the request body
-  put '/country' do CountriesController.update(@@params) end
-  put '/state'   do StatesController.update(@@params) end
-  put '/city'    do CitiesController.update(@@params) end
-  put '/center'  do CentersController.update(@@params) end
-  put '/table'   do TablesController.update(@@params) end
+  put '/country.:format' do | format | CountriesController.update(@@params, format) end
+  put '/state.:format'   do | format | StatesController.update(@@params, format) end
+  put '/city.:format'    do | format | CitiesController.update(@@params, format) end
+  put '/center.:format'  do | format | CentersController.update(@@params, format) end
+  put '/table.:format'   do | format | TablesController.update(@@params, format) end
 
   # Delete services
-  delete '/country/:id' do |id| CountriesController.delete(id) end
-  delete '/state/:id'   do |id| StatesController.delete(id) end
-  delete '/city/:id'    do |id| CitiesController.delete(id) end
-  delete '/center/:id'  do |id| CentersController.delete(id) end
-  delete '/table/:id'   do |id| TablesController.delete(id) end
+  delete '/country/:id.:format' do | id , format | CountriesController.delete(id,format) end
+  delete '/state/:id.:format'   do | id , format | StatesController.delete(id,format) end
+  delete '/city/:id.:format'    do | id , format | CitiesController.delete(id,format) end
+  delete '/center/:id.:format'  do | id , format | CentersController.delete(id,format) end
+  delete '/table/:id.:format'   do | id , format | TablesController.delete(id,format) end
 
   # If the request passed a callback, answer in the appropiate way.
   # Or else, answer normally.

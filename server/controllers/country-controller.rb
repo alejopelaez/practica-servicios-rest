@@ -1,37 +1,28 @@
-class CountriesController
+class CountriesController < BaseController
 
   def self.index format
     countries = Country.all
-    case format
-    when 'json'
-      countries.to_json
-    when 'xml'
-      countries.to_xml
-    end
+    render countries, format
   end
   def self.create params, format
     country = Country.new(params)
-    country.save
-    case format
-    when 'json'
-      country.to_json
-    when 'xml'
-      country.to_xml
+    if country.save
+      render country, format
     end
-end
+  end
 
-def self.read id
-  Country.find(id)
-end
+  def self.read id
+    Country.find(id)
+  end
 
-def self.update params
-  country = Country.find(params["id"])
-  country.update_attributes(params)
-end
+  def self.update params
+    country = Country.find(params["id"])
+    country.update_attributes(params)
+  end
 
-def self.delete id
-  country = Country.find(params["id"])
-  country.destroy
-end
+  def self.delete id
+    country = Country.find(params["id"])
+    country.destroy
+  end
 
 end

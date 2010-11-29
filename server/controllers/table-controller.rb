@@ -1,24 +1,15 @@
-class TablesController
+class TablesController < BaseController
 
   def self.index format
     tables = Table.all
-    case format
-    when 'json'
-      tables.to_json
-    when 'xml'
-      tables.to_xml
-    end
+    render tables, format
   end
   def self.create params, format
     table = Table.new
     table.name = params["name"]
     table.center = Center.find(params["center_id"].to_i)
-    table.save
-    case format
-    when 'json'
-      table.to_json
-    when 'xml'
-      table.to_xml
+    if table.save
+      render table, format
     end
   end
 
