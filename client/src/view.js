@@ -21,7 +21,7 @@ jQuery.extend({
          * Pega los botones.
          */
         $gdoc.append($("<input type='button' value='Load'></input><br><br>").click(function(){
-            self.viewLoadData($("#key").val());
+            self.viewLoadData();
         }));
         /**
          * Crea una grafica de pasteles
@@ -55,7 +55,7 @@ jQuery.extend({
         /**
          * Funcion dummy
          */
-        this.viewLoadData = function(key){
+        this.viewLoadData = function(){
             $.getJSON("/totals/Colombia.json"+"?callback=?", function(data) {
                 self.showCandidatos(data);
             });
@@ -84,8 +84,19 @@ jQuery.extend({
 			}
 		    }
 		    
+
 		}
                 self.showTable("colombia", 0, "", "");
+		var arr = jQuery("#resultTable").find('[class]');
+		
+		$.each(arr,function(index, value){
+	    	    var param = $(value).attr('class').split(" ");
+	    	    var t = param[0];
+	    	    for(var i = 1; i < param.length - 1; ++i)
+	    		t+=" "+param[i];
+	    	    var subTotal = helper(t);
+	    	    self.crearPie(subTotal, param[0]);
+		});	    
             });
 
             /*$.each(listeners, function(i){

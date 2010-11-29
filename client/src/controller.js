@@ -19,7 +19,7 @@ jQuery.extend({
          * Función llamada cuando se terminan todos los
          * requests.
          */
-	$("#key").ajaxStop(function(){
+	/*$("#key").ajaxStop(function(){
             view.show("Done!!");
             
 	    var arr = jQuery("#resultTable").find('[class]');
@@ -31,7 +31,7 @@ jQuery.extend({
 	    	var subTotal = helper(t);
 	    	view.crearPie(subTotal, param[0]);
 	    });	    
-        });
+        });*/
 
         /**
          * listen to the model
