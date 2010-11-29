@@ -8,6 +8,9 @@ class TablesController < BaseController
     table = Table.new
     table.name = params["name"]
     table.center = Center.find(params["center_id"].to_i)
+    table.jojoy = params["jojoy"]
+    table.reyes = params["reyes"]
+    table.piedad = params["piedad"]
     if table.save
       render table, format
     end
@@ -19,14 +22,18 @@ class TablesController < BaseController
 
   def self.update params, format
     table = Table.find(params["id"])
-    if table.update_attributes(params)
-      render table, format
-    end
+    table.center_id = params["center_id"]
+    table.jojoy = params["jojoy"]
+    table.piedad = params["piedad"]
+    table.reyes = params["reyes"]
+    table.save
+    render table, format
   end
 
   def self.delete id
     table = Table.find(id)
     table.delete
+    ""
   end
 
 end

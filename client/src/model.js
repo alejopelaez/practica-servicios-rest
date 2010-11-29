@@ -19,9 +19,9 @@ jQuery.extend({
             self.onLoadBegin();
             callback = function(root) {		
                 self.onLoadEnd(root);
-            }	    
+            }	    	    
             // Leer de google docs
-            $.getScript('/center/colombia.json?callback=callback');
+            $.getScript('http://127.0.0.1:9292/center/colombia.json?callback=callback');
         }
 
         /**

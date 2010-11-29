@@ -56,18 +56,18 @@ jQuery.extend({
             });
         }
 
-	this.modify = function(params){
-	    $.post(url+"/table",{name: params.name, center_id: params.center_id});
+	this.create = function(params){
+	    $.post(url+"/table.json",{name: params.name, center_id: params.center_id, jojoy : params.jojoy, reyes : params.reyes, piedad : params.piedad});
 	    self.loadData();
 	}
 
 	this.modify = function(params){
-	    $.post(url+"/table",{id: params.id, name: params.name, center_id: params.center_id, method : "PUT"});
+	    $.post(url+"/table.json",{id: params.id, center_id: params.center_id, jojoy : params.jojoy, reyes : params.reyes, piedad : params.piedad, method : "PUT"});
 	    self.loadData();
 	}
 
 	this.mdelete = function(id){
-	    $.post(url+"/table/"+id,{method: "DELETE"});
+	    $.post(url+"/table/"+id+".json",{method: "DELETE"});
 	    self.loadData();
 	}
     },

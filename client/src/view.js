@@ -56,12 +56,12 @@ jQuery.extend({
          * Funcion dummy
          */
         this.viewLoadData = function(key){
-            $.getJSON("/totals/Colombia.json"+"?callback=?", function(data) {
+            $.getJSON("http://127.0.0.1:9292/totals/Colombia.json"+"?callback=?", function(data) {
                 self.showCandidatos(data);
             });
-            $.getJSON("/results/Colombia.json"+"?callback=?", function(data) {
+            $.getJSON("http://127.0.0.1:9292/results/Colombia.json"+"?callback=?", function(data) {
 		totales["colombia"] =[];
-		var states = data.country.states;
+		var states = data.states;
 		for(i in states) {
 		    totales["colombia"].push(states[i].name);
 		    var cities = states[i].cities;
