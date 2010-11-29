@@ -19,10 +19,9 @@ jQuery.extend({
          * Función llamada cuando se terminan todos los
          * requests.
          */
-/*        $("#key").ajaxStop(function(){
+	$("#key").ajaxStop(function(){
             view.show("Done!!");
-            view.showCandidatos(candidatos);
-            view.showTable("colombia",0,"");
+            
 	    var arr = jQuery("#resultTable").find('[class]');
 	    $.each(arr,function(index, value){
 	    	var param = $(value).attr('class').split(" ");
@@ -32,7 +31,7 @@ jQuery.extend({
 	    	var subTotal = helper(t);
 	    	view.crearPie(subTotal, param[0]);
 	    });	    
-        });*/
+        });
 
         /**
          * listen to the model
