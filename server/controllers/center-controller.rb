@@ -12,8 +12,8 @@ class CentersController < BaseController
     end
   end
 
-  def self.read params, format
-    render Center.find(params["id"]), format
+  def self.read id, format
+    render Center.find(id), format
   end
 
   def self.update params, format
@@ -23,8 +23,8 @@ class CentersController < BaseController
     end
   end
 
-  def self.delete params
-    center = Center.find(params["id"])
+  def self.delete id
+    center = Center.find(id)
     center.delete
   end
 

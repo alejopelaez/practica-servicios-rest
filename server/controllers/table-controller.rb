@@ -13,8 +13,8 @@ class TablesController < BaseController
     end
   end
 
-  def self.read params, format
-    render Table.find(params["id"]), format
+  def self.read id, format
+    render Table.find(id), format
   end
 
   def self.update params, format
@@ -24,8 +24,8 @@ class TablesController < BaseController
     end
   end
 
-  def self.delete params
-    table = Table.find(params["id"])
+  def self.delete id
+    table = Table.find(id)
     table.delete
   end
 

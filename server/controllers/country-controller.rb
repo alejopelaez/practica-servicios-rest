@@ -23,7 +23,7 @@ class CountriesController < BaseController
   end
 
   def self.delete id
-    country = Country.find(params["id"])
+    country = Country.find(id)
     country.destroy
   end
 

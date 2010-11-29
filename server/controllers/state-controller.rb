@@ -13,8 +13,8 @@ class StatesController < BaseController
     end
   end
 
-  def self.read params, format
-    render State.find(params["id"]), format
+  def self.read id, format
+    render State.find(id), format
   end
 
   def self.update params, format
@@ -24,8 +24,8 @@ class StatesController < BaseController
     end
   end
 
-  def self.delete params
-    state = State.find(params["id"])
+  def self.delete id
+    state = State.find(id)
     state.delete
   end
 

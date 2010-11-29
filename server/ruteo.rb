@@ -26,39 +26,19 @@ class RuteoApp
   end 
 
   # All
-  get '/country.:format' do | format |
-    CountriesController.index format
-  end
-  get '/state.:format'   do | format |
-    StatesController.index format 
-  end
-  get '/city.:format'    do | format |
-    CitiesController.index format
-  end
-  get '/center.:format'  do  | format |
-    CentersController.index format
-  end
-  get '/table.:format'   do | format |
-    TablesController.index format
-  end
+  get '/country.:format' do | format |  CountriesController.index format  end
+  get '/state.:format'   do | format |  StatesController.index format   end
+  get '/city.:format'    do | format |  CitiesController.index format  end
+  get '/center.:format'  do  | format | CentersController.index format  end
+  get '/table.:format'   do | format |  TablesController.index format  end
 
 
   # Create services, the parameters are passed in the request body
-  post '/country.:format' do | format |
-    CountriesController.create(@@params, format) 
-  end
-  post '/state.:format'   do | format |
-    StatesController.create(@@params, format) 
-  end
-  post '/city.:format'    do  | format |
-    CitiesController.create(@@params, format) 
-  end
-  post '/center.:format'  do | format |
-    CentersController.create(@@params, format) 
-  end
-  post '/table'   do | format |
-    TablesController.create(@@params, format) 
-  end
+  post '/country.:format' do | format |  CountriesController.create(@@params, format)   end
+  post '/state.:format'   do | format |  StatesController.create(@@params, format)   end
+  post '/city.:format'    do  | format | CitiesController.create(@@params, format)   end
+  post '/center.:format'  do | format |  CentersController.create(@@params, format)  end
+  post '/table'   do | format |  TablesController.create(@@params, format)  end
 
   # Read services
   # Not finished yet, must do something with ther resource
